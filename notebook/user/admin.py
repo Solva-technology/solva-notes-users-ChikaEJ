@@ -1,11 +1,16 @@
 from django.contrib import admin
+from django.contrib.auth import get_user_model
 from note.models import Category, Note, Status
-from user.models import User, UserProfile
+from user.models import UserProfile
 
+User = get_user_model()
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['username'] + [field.name for field in User._meta.fields if field.name != 'username']
+    list_display_links = ('username',)
+    ordering = ('id',)
+    fields = [field.name for field in User._meta.fields if field.name not in ('id', 'password')]
 
 
 @admin.register(UserProfile)
