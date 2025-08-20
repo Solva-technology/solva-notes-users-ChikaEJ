@@ -1,9 +1,10 @@
+from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
-from django.contrib.auth.decorators import login_required
 
 from .forms.form import NoteForm
 from .models import Note
+
 
 @login_required(login_url='login')
 def all_notes(request):
@@ -16,6 +17,7 @@ def all_notes(request):
     context = {'all_notes': all_notes}
     return render(request, 'notes/all_notes.html', context)
 
+
 @login_required(login_url='login')
 def note_detail(request, note_id):
     note = get_object_or_404(
@@ -27,6 +29,7 @@ def note_detail(request, note_id):
     )
     context = {'note': note}
     return render(request, 'notes/note_detail.html', context)
+
 
 @login_required(login_url='login')
 def note_create_update(request, note_id=None):
@@ -52,6 +55,7 @@ def note_create_update(request, note_id=None):
         {'form': note_form, 'note': note}
     )
 
+
 @login_required(login_url='login')
 def note_delete(request, note_id):
     note = get_object_or_404(Note, pk=note_id)
@@ -60,6 +64,7 @@ def note_delete(request, note_id):
     if request.method == 'POST':
         note.delete()
         return redirect('notes:all_notes')
+
 
 @login_required(login_url='login')
 def my_notes(request):

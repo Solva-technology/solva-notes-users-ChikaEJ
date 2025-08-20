@@ -17,7 +17,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Category',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID')
+                 ),
                 ('title', models.TextField(verbose_name='Название')),
                 ('description', models.TextField(verbose_name='Описание')),
             ],
@@ -29,9 +34,17 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Status',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID')
+                 ),
                 ('name', models.TextField(verbose_name='Статус')),
-                ('is_final', models.BooleanField(default=False, verbose_name='Завершен')),
+                ('is_final', models.BooleanField(
+                    default=False,
+                    verbose_name='Завершен')
+                 ),
             ],
             options={
                 'verbose_name': 'Статус',
@@ -41,12 +54,31 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Note',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name='ID')
+                 ),
                 ('text', models.TextField(verbose_name='Текст')),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')),
-                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Автор')),
-                ('categories', models.ManyToManyField(blank=True, to='note.category', verbose_name='Категории')),
-                ('status', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='note.status', verbose_name='Статус')),
+                ('created_at', models.DateTimeField(
+                    auto_now_add=True,
+                    verbose_name='Дата создания')
+                 ),
+                ('author', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE,
+                    to=settings.AUTH_USER_MODEL,
+                    verbose_name='Автор')
+                 ),
+                ('categories', models.ManyToManyField(
+                    blank=True, to='note.category',
+                    verbose_name='Категории')
+                 ),
+                ('status', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE,
+                    to='note.status',
+                    verbose_name='Статус')
+                 ),
             ],
             options={
                 'verbose_name': 'Запись',
